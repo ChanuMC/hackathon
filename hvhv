@@ -1,0 +1,20 @@
+from flask import Flask, request, jsonify
+
+app = Flask(__name__)
+
+@app.route('/items/<int:item_id>', methods=['GET'])
+def get_item(item_id):
+    # Replace with your logic to fetch item data
+    item = {"id": item_id, "name": f"Item {item_id}"}
+    return jsonify(item)
+
+@app.route('/items', methods=['POST'])
+def create_item():
+    # Replace with your logic to create a new item
+    data = request.get_json()
+    new_item = {"id": len(items) + 1, "name": data["name"]}
+    items.append(new_item)
+    return jsonify(new_item), 201
+
+if __name__ == '__main__':
+    app.run(debug=True)
